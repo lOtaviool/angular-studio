@@ -1,0 +1,22 @@
+.container{
+    align-items: center;
+    display: grid;
+}
+
+.content{
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.details{
+    width: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+
+    span{
+    font-family: monospace;
+    }   
+}

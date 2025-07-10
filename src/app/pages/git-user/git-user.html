@@ -1,0 +1,45 @@
+<div class="container">
+    <form [formGroup]="myForm" novalidate (submit)="getUser()">
+        <div class="content" >
+            <label>Nome do Usuário</label><br/>
+            <div [ngStyle]="{display: 'flex', gap: '5px'}">
+                <input class="form-control" placeholder="Digite o nome aqui" formControlName="userName"/>
+                <br/><br/>
+                <button class="btn btn-dark" type="submit" [disabled]="myForm.invalid">Buscar</button>
+            </div>
+        </div>
+    </form>
+    <br/>
+
+    <div class="content" >
+        <div *ngIf="!user && !isLoading">
+            <h4>Nenhum dado encontrado! :(</h4>
+        </div>
+        <div *ngIf="isLoading">
+            <div class="spinner-border text-dark" role="status"></div>
+        </div>
+        <div *ngIf="user">
+            <h2>Usuário do GitHub</h2>
+            <br/>
+            <div class="details">
+                <div [ngStyle]="{display: 'grid'}">
+                    <span>Nome: {{user?.name || "--"}}</span>
+                    <span>Id: {{user?.id || "--"}}</span>
+                    <span>Login: {{user?.login || "--"}}</span>
+                    <span>Email: {{user?.email || "--"}}</span>
+                    <span>Url: {{user?.url || "--"}}</span>
+                </div>
+                <div [ngStyle]="{display: 'grid'}">
+                    <span>Nº de repositórios: {{user?.public_repos || "--"}}</span>
+                    <span>Repositórios: {{user?.repos_url || "--"}}</span>
+                    <span>Organizações: {{user?.organizations_url || "--"}}</span>
+                </div>
+                <div [ngStyle]="{display: 'grid'}">
+                    <span>Tipo de conta: {{user?.type || "--"}}</span>
+                    <span>Avatar: {{user?.avatar_url || "--"}}</span>
+                    <span>Visibilidade: {{user?.user_view_type || "--"}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

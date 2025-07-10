@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="head">
+        <img src="https://images.seeklogo.com/logo-png/27/2/github-logo-png_seeklogo-273183.png"
+            width="50" height="50" class="rounded-circle"
+        />
+        <span [ngStyle]="{fontFamily:'monospace', fontSize: '28px'}">GitHub Studio</span>
+    </div>
+    <br/>
+    <nav [ngStyle]="{display: 'grid', gap: '5px'}">
+        <a routerLink="/list-users" class="item" >
+            <span>Lista de Usuários</span>
+        </a>
+        <a routerLink="/git-user" class="item">
+            <ng-content>Usuário Detalhado</ng-content>
+        </a>
+    </nav>
+</div>

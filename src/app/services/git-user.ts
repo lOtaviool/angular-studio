@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class GitUserService {
-  public BaseUrl = 'http://localhost:3000';
+  public GIT_URL = 'https://api.github.com';
 
   constructor(
     private http: HttpClient, 
@@ -14,7 +14,7 @@ export class GitUserService {
   ) { }
 
   getUser(username: string){
-    const url = `${this.BaseUrl}/api/github/${username}`
+    const url = `${this.GIT_URL}/users/${username}`
     return this.http.get(url);
   }
 }

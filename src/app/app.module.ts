@@ -3,9 +3,11 @@ import { App } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
-import { GitUserModule } from "./components/git-user/git-user.module";
+import { GitUserModule } from "./pages/git-user/git-user.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ListUsersModule } from "./pages/list-users/list-users.module";
+import { HomeModule } from "./pages/home/home.module";
 
 @NgModule({
     declarations:[App],
@@ -16,7 +18,9 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        GitUserModule
+        HomeModule,
+        GitUserModule,
+        ListUsersModule,
     ],
     exports:[],
     providers: [],
