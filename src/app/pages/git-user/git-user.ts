@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GitUserService } from '../../services/git-user';
+import { UserService } from '../../services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -14,7 +14,7 @@ export class GitUser implements OnInit {
   isLoading: boolean = false;
 
   constructor(
-    private gitSevice: GitUserService,
+    private userSevice: UserService,
     private formBuilder: FormBuilder
   ){
     this.myForm = this.formBuilder.group({
@@ -26,7 +26,7 @@ export class GitUser implements OnInit {
 
   async getUser(){
     this.isLoading = true;
-    await this.gitSevice.getUser(this.myForm?.value.userName).subscribe((res)=>{
+    await this.userSevice.getUser(this.myForm?.value.userName).subscribe((res)=>{
       this.user = res;
       console.log(this.user);
       this.isLoading = false;

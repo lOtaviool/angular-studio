@@ -1,0 +1,31 @@
+.container{
+    display: flex;
+    align-items: center;
+    display: grid;
+    padding: 0 20px;
+}
+
+.head{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.card-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    width: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.card-content{
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    flex-direction: row;
+    align-items: flex-end;
+    width: 100%;
+}

@@ -1,1 +1,22 @@
-<p>list-users works!</p>
+<div class="container" >
+    <div class="head">
+        <h3 [ngStyle]="{fontSize: '32px'}">Lista de Usuários</h3>
+    </div>
+    <br/>
+    <div class="card-container" *ngFor="let user of list_data">
+        <div class="card-content" role="user-card">
+            <div [ngStyle]="{display:'flex', alignItems: 'center', gap:'20px', width: '100%'}">
+                <img class="rounded-circle float-start" [ngStyle]="{ width: '100px'}" [src]="user?.avatar"/>
+                <h4>{{user?.name}}</h4>
+            </div>
+            <div class="card-content">
+                <button class="btn btn-dark" title="Editar"[ngStyle]="{width:'50px'}">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+                <button class="btn btn-outline-dark" title="Deletar" [ngStyle]="{width:'50px'}">
+                    <i class="bi bi-trash3"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
