@@ -11,10 +11,7 @@
     </form>
     <br/>
 
-    <div class="content" >
-        <div *ngIf="!user && !isLoading">
-            <h4>Nenhum dado encontrado! :(</h4>
-        </div>
+    <div class="content" *ngIf="user || isLoading">
         <div *ngIf="isLoading">
             <div class="spinner-border text-dark" role="status"></div>
         </div>

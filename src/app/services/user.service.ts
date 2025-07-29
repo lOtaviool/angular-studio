@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,28 +16,24 @@ export class UserService {
     private router: Router,
   ) { }
 
-  getListUser(){
+  getListUser(): Observable<User[]>{
     const url = `${this.URL_BASE}/data`;
-    return this.http.get(url);
+    return this.http.get<User[]>(url);
   }
-
-
-  // updateUserName(userId: string, name: string): Promise<User> {
-  //   const url = ``
-  //   const response = ''
-
-  //   return response.data;
-  // }
-
-  // deleteUser(userId: string): Promise<User> {
-  //   const url = ``
-  //   const response = 
-
-  //   return response.data;
-  // }
 
   getUser(username: string){
     const url = `${this.GIT_URL}/users/${username}`
     return this.http.get(url);
   }
+
+  updateUserName(userId: string, name: string){
+    const url = `${this.URL_BASE}/data/${userId}`;
+    return this.http.put(url, {name: name});
+  }
+
+  deleteUser(userId: string){
+    const url = `${this.URL_BASE}/data/${userId}`;
+    return this.http.delete(url);
+  }
+
 }

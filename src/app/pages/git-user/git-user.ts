@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize, tap } from 'rxjs';
 
 @Component({
   selector: 'app-git-user',
@@ -24,13 +25,20 @@ export class GitUser implements OnInit {
 
   ngOnInit(): void {}
 
-  async getUser(){
-    this.isLoading = true;
-    await this.userSevice.getUser(this.myForm?.value.userName).subscribe((res)=>{
-      this.user = res;
-      console.log(this.user);
-      this.isLoading = false;
-    })
+  getUser() {
+    const userName = this.myForm?.value.userName;
+
+    this.userSevice.getUser(userName).pipe(
+      finalize(() => this.isLoading = false)
+    ).subscribe({
+      next: (res) => {
+        this.user = res;
+        console.log(this.user);
+      },
+      error: (err) => {
+        console.error('Erro ao buscar usuário:', err);
+      }
+    });
   }
 
 }

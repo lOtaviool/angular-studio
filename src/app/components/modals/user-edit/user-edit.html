@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h4 class="modal-title">Atualizar Usuário</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="editForm" novalidate (submit)="onSubmit()">
+        <div class="content" >
+            <label>Nome</label><br/>
+            <div [ngStyle]="{display: 'flex', gap: '5px'}">
+                <input class="form-control" placeholder="Digite o nome aqui" formControlName="userName"/>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-outline-dark" (click)="activeModal.close()">Fechar</button>
+    <button class="btn btn-dark" (click)="onSubmit()">Editar</button>
+</div>
