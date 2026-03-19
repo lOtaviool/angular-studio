@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../interfaces/user';
-import { finalize, tap } from 'rxjs';
+import { finalize, Observable, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserEdit } from '../../components/modals/user-edit/user-edit';
 
@@ -12,14 +12,17 @@ import { UserEdit } from '../../components/modals/user-edit/user-edit';
   styleUrls: ['./list-users.scss']
 })
 export class ListUsers implements OnInit {
-  list_data: User[] = [];
   isLoading: boolean = true;
-
+  users$: Observable<User[]>;
+  
   constructor(
     private userService: UserService,
     private modalService: NgbModal
-  ){}
-
+  ){
+    this.users$ = this.userService.users$;
+  }
+  
+  
   ngOnInit(): void {
     this.getListUsers();
   }
@@ -28,9 +31,6 @@ export class ListUsers implements OnInit {
     this.userService.getListUser().pipe(
       finalize(() => this.isLoading = false)
     ).subscribe({
-      next: (res: User[]) => {
-        this.list_data = res;
-      },
       error: (err) => {
         console.error('Erro ao buscar lista de usuários:', err);
       }

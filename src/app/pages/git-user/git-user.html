@@ -12,10 +12,10 @@
     <br/>
 
     <div class="content" *ngIf="user || isLoading">
-        <div *ngIf="isLoading">
+        <div *ngIf="!user && isLoading">
             <div class="spinner-border text-dark" role="status"></div>
         </div>
-        <div *ngIf="user">
+        <div *ngIf="user && !isLoading">
             <h2>Usuário do GitHub</h2>
             <br/>
             <div class="details">
@@ -38,5 +38,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="content" *ngIf="!user && !isLoading">
+        <h2 [ngStyle]="{'color': '#999'}">Ops! Nenhum usuário encontrado!</h2>
     </div>
 </div>

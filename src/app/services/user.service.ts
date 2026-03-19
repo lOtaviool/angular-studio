@@ -1,24 +1,24 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  public URL_BASE = 'https://6863d24a88359a373e967374.mockapi.io';
+  public URL_BASE = 'https://68b886ddb715405043287a6f.mockapi.io/';
   public GIT_URL = 'https://api.github.com';
+  private http = inject(HttpClient);
+  private usersSubject = new BehaviorSubject<User[]>([]);
+  users$ = this.usersSubject.asObservable();
 
-  constructor(
-    private http: HttpClient, 
-    private router: Router,
-  ) { }
-
-  getListUser(): Observable<User[]>{
+  getListUser() {
     const url = `${this.URL_BASE}/data`;
-    return this.http.get<User[]>(url);
+    return this.http.get<User[]>(url).pipe(
+      tap((users) => this.usersSubject.next(users))
+    );
   }
 
   getUser(username: string){
