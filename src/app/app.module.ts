@@ -8,6 +8,10 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ListUsersModule } from "./pages/list-users/list-users.module";
 import { HomeModule } from "./pages/home/home.module";
+import { StoreModule } from "@ngrx/store";
+import { userListReducer } from "./store/user-list/user-list.reducer";
+import { EffectsModule } from "@ngrx/effects";
+import { UserListEffects } from "./store/user-list/user-list.effects";
 
 @NgModule({
     declarations:[App],
@@ -18,6 +22,8 @@ import { HomeModule } from "./pages/home/home.module";
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        StoreModule.forRoot({ userList: userListReducer }),
+        EffectsModule.forRoot([UserListEffects]),
         HomeModule,
         GitUserModule,
         ListUsersModule,
