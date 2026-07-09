@@ -4,6 +4,9 @@ import { User } from '../../interfaces/user';
 import { finalize, Observable, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserEdit } from '../../components/modals/user-edit/user-edit';
+import { select, Store } from '@ngrx/store';
+import { UserListActions } from '../../store/user-list/user-list.actions';
+import { selectResults } from '../../store/user-list/user-list.selectors';
 
 @Component({
   selector: 'app-list-users',
@@ -17,14 +20,18 @@ export class ListUsers implements OnInit {
   
   constructor(
     private userService: UserService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private store: Store
   ){
     this.users$ = this.userService.users$;
+    // this.users$ = this.store.pipe(
+    //   select(selectResults)
+    // )
   }
   
   
   ngOnInit(): void {
-    this.getListUsers();
+    this.store.dispatch(UserListActions.listUsersRequested());
   }
 
   getListUsers(){
