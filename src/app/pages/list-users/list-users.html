@@ -3,11 +3,11 @@
         <h3 [ngStyle]="{fontSize: '32px'}">Lista de Usuários</h3>
     </div>
     <br/>
-    <div *ngIf="!users$ && !isLoading">
+    <div *ngIf="error$ | async">
         <h4>Nenhum dado encontrado! :(</h4>
     </div>
-    <div *ngIf="!users$ && isLoading">
-        <div class="spinner-border text-dark" role="status"></div>
+    <div *ngIf="loading$ | async" class="spinner-container">
+        <div class="spinner-border text-dark" role="status"></div> 
     </div>
     <div class="card-container" *ngFor="let user of users$ | async">
         <div class="card-content" role="user-card">

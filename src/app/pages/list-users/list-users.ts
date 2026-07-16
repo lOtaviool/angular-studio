@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserEdit } from '../../components/modals/user-edit/user-edit';
 import { select, Store } from '@ngrx/store';
 import { UserListActions } from '../../store/user-list/user-list.actions';
-import { selectResults } from '../../store/user-list/user-list.selectors';
+import { selectError, selectLoading, selectResults } from '../../store/user-list/user-list.selectors';
 
 @Component({
   selector: 'app-list-users',
@@ -17,7 +17,9 @@ import { selectResults } from '../../store/user-list/user-list.selectors';
 export class ListUsers implements OnInit {
   isLoading: boolean = true;
   users$: Observable<User[]>;
-  
+  loading$: Observable<boolean>;
+  error$: Observable<string | null>;
+
   constructor(
     private userService: UserService,
     private modalService: NgbModal,
@@ -27,6 +29,8 @@ export class ListUsers implements OnInit {
     // this.users$ = this.store.pipe(
     //   select(selectResults)
     // )
+    this.loading$ = this.store.select(selectLoading);
+    this.error$ = this.store.select(selectError);
   }
   
   
@@ -45,25 +49,11 @@ export class ListUsers implements OnInit {
   }
 
   updateUSer(user: User){
-    this.userService.updateUserName(user?.id, user?.name).pipe().subscribe({
-      next: () => {
-        this.getListUsers();
-      },
-      error: (err) => {
-        console.error('Erro ao atualizar usuário:', err);
-      }
-    })
+    this.store.dispatch(UserListActions.updateUserRequested({ userId: user.id, name: user.name }));
   }
 
   deleteUser(userId: string){
-    this.userService.deleteUser(userId).pipe().subscribe({
-      next: () => {
-        this.getListUsers();
-      },
-      error: (err) => {
-        console.error('Erro ao deletar usuário:', err);
-      }
-    })
+    this.store.dispatch(UserListActions.deleteUserRequested({ userId }));
   }
 
   openEditModal(user: User){

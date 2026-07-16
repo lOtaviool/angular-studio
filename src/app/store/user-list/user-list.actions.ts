@@ -8,5 +8,11 @@ export const UserListActions = createActionGroup({
     'List users requested': emptyProps(),
     'List users success': props<{users: User[]}>(),
     'List users error': props<{error: string}>(),
+    'Update user requested': props<{userId: string, name: string}>(),
+    'Update user success': props<{user: any}>(),
+    'Update user error': props<{error: string}>(),
+    'Delete user requested': props<{userId: string}>(),
+    'Delete user success': props<{userId: string}>(),
+    'Delete user error': props<{error: string}>()
   }
 });
